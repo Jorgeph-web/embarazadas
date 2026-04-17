@@ -104,7 +104,11 @@
     transition: all 0.3s;
   }
   nav .container { display: flex; justify-content: space-between; align-items: center; }
-  nav .logo img { height: 42px; width: auto; }
+  nav .logo img {
+    height: 42px;
+    width: auto;
+    filter: brightness(0) saturate(100%);
+  }
   nav .nav-cta {
     background: var(--olive);
     color: var(--white);
@@ -154,7 +158,12 @@
     z-index: 0;
   }
   .hero .container { position: relative; z-index: 1; }
-  .hero-logo img { height: 64px; width: auto; margin-bottom: 28px; }
+  .hero-logo img {
+    height: 64px;
+    width: auto;
+    margin-bottom: 28px;
+    filter: brightness(0) saturate(100%);
+  }
   .hero-eyebrow {
     display: inline-block;
     padding: 6px 16px;
@@ -349,22 +358,24 @@
     background: var(--cream);
   }
   .galeria-header { text-align: center; margin-bottom: 50px; }
+  /* MASONRY: respeta la proporción natural de cada foto */
   .galeria-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 180px;
-    gap: 12px;
+    column-count: 4;
+    column-gap: 12px;
   }
   .galeria-item {
     position: relative;
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;
+    margin-bottom: 12px;
+    break-inside: avoid;
+    display: block;
   }
   .galeria-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
     transition: transform 0.6s ease;
   }
   .galeria-item::after {
@@ -372,13 +383,10 @@
     position: absolute; inset: 0;
     background: linear-gradient(180deg, transparent 60%, rgba(62, 74, 43, 0.4) 100%);
     opacity: 0; transition: opacity 0.3s;
+    pointer-events: none;
   }
-  .galeria-item:hover img { transform: scale(1.08); }
+  .galeria-item:hover img { transform: scale(1.05); }
   .galeria-item:hover::after { opacity: 1; }
-  /* Destacadas (hero grandes) */
-  .galeria-item.big { grid-column: span 2; grid-row: span 2; }
-  .galeria-item.tall { grid-row: span 2; }
-  .galeria-item.wide { grid-column: span 2; }
 
   .galeria-cta { text-align: center; margin-top: 50px; }
 
@@ -448,14 +456,14 @@
   }
   .planes-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
     align-items: stretch;
   }
   .plan {
     background: var(--white);
     border-radius: var(--radius-lg);
-    padding: 40px 32px;
+    padding: 36px 26px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -517,7 +525,7 @@
   }
   .plan-price {
     font-family: var(--serif);
-    font-size: 2.6rem;
+    font-size: 2.2rem;
     color: var(--olive-dark);
     line-height: 1;
     margin-bottom: 4px;
@@ -909,11 +917,9 @@
     .about-img { max-width: 460px; margin: 0 auto; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 20px; }
     .escenarios-grid { grid-template-columns: 1fr; }
-    .galeria-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
-    .galeria-item.big, .galeria-item.tall, .galeria-item.wide { grid-column: span 2; grid-row: span 1; }
-    .galeria-item.big { grid-row: span 2; }
+    .galeria-grid { column-count: 2; }
     .proceso-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-    .planes-grid { grid-template-columns: 1fr; gap: 30px; }
+    .planes-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .plan.featured { transform: none; }
     .plan.featured:hover { transform: translateY(-6px); }
     .extras-grid { grid-template-columns: repeat(2, 1fr); }
@@ -934,9 +940,9 @@
     .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
     .stat-item .num { font-size: 2rem; }
-    .galeria-grid { grid-template-columns: 1fr; grid-auto-rows: 260px; }
-    .galeria-item.big, .galeria-item.tall, .galeria-item.wide { grid-column: auto; grid-row: auto; }
+    .galeria-grid { column-count: 1; }
     .proceso-grid { grid-template-columns: 1fr; }
+    .planes-grid { grid-template-columns: 1fr; gap: 30px; }
     .extras-grid { grid-template-columns: 1fr; }
     .extra-item { border-right: none; border-bottom: 1px solid rgba(92,107,63,0.1); padding: 14px; }
     .extra-item:last-child { border-bottom: none; }
@@ -1078,18 +1084,18 @@
       <h2>Sesiones que <em>hablan por sí solas</em></h2>
     </div>
     <div class="galeria-grid">
-      <div class="galeria-item big"><img src="https://jorgeph-web.github.io/embarazadas/img/Anny-8.JPG" alt="Sesión gestación" loading="lazy"></div>
+      <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Anny-8.JPG" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Liseth-3.JPG" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Valeria-1.JPG" alt="Sesión gestación" loading="lazy"></div>
-      <div class="galeria-item tall"><img src="https://jorgeph-web.github.io/embarazadas/img/Lina-4.JPG" alt="Sesión gestación" loading="lazy"></div>
+      <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Lina-4.JPG" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Valeria-4.JPG" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Embarazo_Luisa-2.JPG" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Anny-10.JPG" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Liseth-9.JPG" alt="Sesión gestación" loading="lazy"></div>
-      <div class="galeria-item wide"><img src="https://jorgeph-web.github.io/embarazadas/img/Valeria-12.JPG" alt="Sesión gestación" loading="lazy"></div>
+      <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Valeria-12.JPG" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Embarazo_Luisa-6.JPG" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Lina-15.JPG" alt="Sesión gestación" loading="lazy"></div>
-      <div class="galeria-item tall"><img src="https://jorgeph-web.github.io/embarazadas/img/Valentia-5.JPG" alt="Sesión gestación" loading="lazy"></div>
+      <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Valentia-5.JPG" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Liseth-20.JPG" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Diana_Historia-1.jpg" alt="Sesión gestación" loading="lazy"></div>
       <div class="galeria-item"><img src="https://jorgeph-web.github.io/embarazadas/img/Valentia-11.JPG" alt="Sesión gestación" loading="lazy"></div>
@@ -1145,16 +1151,16 @@
       <span class="eyebrow">Paquetes fotográficos</span>
       <h2>Elige el plan que <em>mereces</em></h2>
     </div>
-    <p class="planes-subtitle">Semana 28–34 de embarazo · Estudio, exteriores o en casa · No incluye maquillaje ni vestuarios adicionales</p>
+    <p class="planes-subtitle">Semana 28–34 de embarazo · Estudio, exteriores o en casa · Incluye asistente profesional, vestuarios, velos y diferentes fondos · Maquillaje no incluido</p>
 
     <div class="planes-grid">
       <!-- ESENCIAL -->
       <div class="plan">
         <div class="plan-name">Esencial</div>
-        <div class="plan-price">$220.000</div>
+        <div class="plan-price">$240.000</div>
         <span class="plan-price-label">pesos colombianos</span>
         <ul>
-          <li>1 hora de sesión</li>
+          <li>Hasta 1 hora de sesión</li>
           <li>1 cambio de vestuario</li>
           <li>6 fotos en archivo digital</li>
           <li>Edición profesional full calidad</li>
@@ -1167,19 +1173,19 @@
       <div class="plan featured">
         <div class="plan-badge">✦ Más elegido</div>
         <div class="plan-name">Completo</div>
-        <div class="plan-price">$400.000</div>
+        <div class="plan-price">$450.000</div>
         <span class="plan-price-label">pesos colombianos</span>
         <ul>
-          <li>2 horas de sesión</li>
-          <li>Cambios de vestuario</li>
+          <li>Hasta 2 horas de sesión</li>
+          <li>2 cambios de vestuario</li>
           <li>Body Gold incluido</li>
           <li>10 fotos en archivo digital</li>
-          <li>8 fotos impresas 13x18 cm</li>
+          <li>6 fotos impresas 13x18 cm</li>
           <li>2 fotos impresas 20x30 cm</li>
         </ul>
         <div class="plan-regalo">
           <strong>🎁 Regalo incluido</strong>
-          Foto enmarcada 40x30 retablo a elección
+          Retablo 40x30 a elección
         </div>
         <a href="https://wa.me/573153864921?text=Hola%20Jorge%2C%20vengo%20desde%20tu%20Landing%20Page%20de%20maternidad%20🤰%20Quiero%20el%20plan%20Completo." class="plan-cta" target="_blank" rel="noopener">Quiero este plan</a>
       </div>
@@ -1187,21 +1193,44 @@
       <!-- PREMIUM -->
       <div class="plan">
         <div class="plan-name">Premium</div>
-        <div class="plan-price">$500.000</div>
+        <div class="plan-price">$590.000</div>
         <span class="plan-price-label">pesos colombianos</span>
         <ul>
-          <li>2 horas de sesión</li>
+          <li>Hasta 2:30 horas de sesión</li>
           <li>3 cambios de vestuario</li>
           <li>Body Gold incluido</li>
           <li>15 fotos en archivo digital</li>
-          <li>5 fotos impresas 20x30 cm</li>
           <li>5 fotos impresas 13x18 cm</li>
+          <li>5 fotos impresas 20x30 cm</li>
+          <li>Mini video boomerang para redes</li>
         </ul>
         <div class="plan-regalo">
           <strong>🎁 Regalo incluido</strong>
-          Foto enmarcada 40x30 retablo a elección
+          Retablo 40x30 a elección
         </div>
         <a href="https://wa.me/573153864921?text=Hola%20Jorge%2C%20vengo%20desde%20tu%20Landing%20Page%20de%20maternidad%20🤰%20Quiero%20el%20plan%20Premium." class="plan-cta" target="_blank" rel="noopener">Quiero este plan</a>
+      </div>
+
+      <!-- LEGACY (NUEVO) -->
+      <div class="plan">
+        <div class="plan-name">Legacy</div>
+        <div class="plan-price">$850.000</div>
+        <span class="plan-price-label">pesos colombianos</span>
+        <ul>
+          <li>Hasta 3 horas de sesión</li>
+          <li>4 cambios de vestuario</li>
+          <li>Body Gold incluido</li>
+          <li>Sesión familiar incluida</li>
+          <li>25 fotos en archivo digital</li>
+          <li>10 fotos impresas 13x18 cm</li>
+          <li>5 fotos impresas 20x30 cm</li>
+          <li>Mini video + Behind the scenes</li>
+        </ul>
+        <div class="plan-regalo">
+          <strong>🎁 Regalos incluidos</strong>
+          Book 40x30 (7 hojas) + 2 retablos 40x30
+        </div>
+        <a href="https://wa.me/573153864921?text=Hola%20Jorge%2C%20vengo%20desde%20tu%20Landing%20Page%20de%20maternidad%20🤰%20Quiero%20el%20plan%20Legacy." class="plan-cta" target="_blank" rel="noopener">Quiero este plan</a>
       </div>
     </div>
 
@@ -1210,8 +1239,8 @@
       <h3>Complementos disponibles</h3>
       <div class="extras-grid">
         <div class="extra-item">
-          <span class="extra-price">$160.000</span>
-          <span class="extra-label">Book 40x30 · 6 hojas</span>
+          <span class="extra-price">$180.000</span>
+          <span class="extra-label">Book 40x30 · 7 hojas</span>
         </div>
         <div class="extra-item">
           <span class="extra-price">$25.000</span>
